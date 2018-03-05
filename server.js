@@ -1,6 +1,15 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
+var Pool= require('pg').Pool;
+
+var config={
+    user: '',
+    database: '', 
+    host:'';
+    port:'';
+    password:process.env.DB_PASSWORD
+};
 
 var app = express();
 app.use(morgan('combined'));
@@ -17,6 +26,15 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
+function hash(input){
+     
+ }
+ 
+app.get('/hash/:input',function(req,res))
+{
+    var hashedString =hash(res.params.input);
+    res.send(hashedString);
+})
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
